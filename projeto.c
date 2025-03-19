@@ -53,14 +53,32 @@ int listarTarefas(ListaDeTarefas *lt){
 }
 
 int carregarTarefas(ListaDeTarefas *lt, char *nome){
-    printf("Carregar Tarefa\n");
+    FILE *fp=fopen(nome, "rb");
+    if (fp == NULL)
+    return ;
+
+    fread(lt, sizeof(ListaDeTarefas),1,fp);
+    fclose(fp);
     return 0;
 }
 int salvarTarefas(ListaDeTarefas *lt, char *nome){
-    printf("Salvar Tarefa\n");
+    FILE *fp=fopen(nome, "wb");
+    if (fp == NULL)
+    return 1;
+
+    fwrite(lt, sizeof(ListaDeTarefas),1,fp);
+    fclose(fp);
     return 0;
 }
 
 void exibirMenu(){
+    int escolha;
     printf("Menu\n");
+    printf("1. Criar tarefa\n");
+    printf("2. Deletar tarefa\n");
+    printf("3. Listar tarefa\n");
+    printf("0. Sair\n");
+
+    printf("Escolha e digite o numero:\n");
+    scanf("%d", &escolha);
 }
